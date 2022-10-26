@@ -4,6 +4,11 @@
  */
 package pooii_trabajo;
 
+import Controllers.NoticiaController;
+import Model.Noticia;
+import View.VistaNoticia;
+import java.io.IOException;
+
 /**
  *
  * @author apa16
@@ -13,8 +18,10 @@ public class POOII_Trabajo {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException {
+        Noticia modelo=new Noticia();
+        VistaNoticia vista=new VistaNoticia();
+        NoticiaController controlador=new NoticiaController(vista, modelo);
     }
     
 }
