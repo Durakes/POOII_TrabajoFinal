@@ -8,6 +8,7 @@ import Controllers.NoticiaController;
 import Model.Noticia;
 import View.VistaNoticia;
 import java.io.IOException;
+import View.VistaLogin;
 
 /**
  *
@@ -22,6 +23,11 @@ public class POOII_Trabajo {
         Noticia modelo=new Noticia();
         VistaNoticia vista=new VistaNoticia();
         NoticiaController controlador=new NoticiaController(vista, modelo);
+        
+        
+        /*Para ver flujo de usuario: 
+        VistaLogin obj = new VistaLogin();*/
+        
     }
     
 }
