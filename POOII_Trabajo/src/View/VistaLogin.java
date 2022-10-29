@@ -3,8 +3,6 @@ package View;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.io.*;
@@ -13,7 +11,8 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-public class VistaLogin implements ActionListener{
+public class VistaLogin
+{
     
     public JFrame frame;
     public JButton btnRegistrar, btnLogin;
@@ -66,7 +65,6 @@ public class VistaLogin implements ActionListener{
         btnLogin.setBounds(280,180,200,20);
         btnLogin.setBackground(new Color(252,152,53));
         btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnLogin.addActionListener(this);
         
         lblRegistro = new JLabel("¿No tienes una cuenta?");
         lblRegistro.setBounds(280,220,150,20);
@@ -80,7 +78,6 @@ public class VistaLogin implements ActionListener{
         btnRegistrar.setOpaque(false);
         btnRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnRegistrar.setForeground(Color.ORANGE);
-        btnRegistrar.addActionListener(this);
         
         frame.add(lblTitulo);
         frame.add(lblLogo);
@@ -100,21 +97,6 @@ public class VistaLogin implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getSource() == btnLogin)
-        {
-            VistaPerfil obj = new VistaPerfil();
-            frame.dispose();
-        }
-        if(e.getSource() == btnRegistrar)
-        {
-            try {
-                VistaRegistro objRegistro = new VistaRegistro();
-            } catch (MalformedURLException ex) {
-                
-            }
-        }
-    }
+   
     
 }

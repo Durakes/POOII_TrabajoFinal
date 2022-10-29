@@ -58,8 +58,8 @@ public class VistaPerfil implements ActionListener {
         lblLogo.setBounds(40,30,120,120);
         
         //Campos de info
-        lblUsuario = new JLabel("pepeTS");
-        lblUsuario.setBounds(180,35,100,30);
+        lblUsuario = new JLabel();
+        lblUsuario.setBounds(180,35,200,30);
         lblUsuario.setForeground(Color.WHITE);
         lblUsuario.setFont(new Font("Arial", Font.PLAIN, 23));
         

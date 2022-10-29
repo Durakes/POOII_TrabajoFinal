@@ -9,6 +9,9 @@ import Model.Noticia;
 import View.VistaNoticia;
 import java.io.IOException;
 import View.VistaLogin;
+import Model.Usuario;
+import Controllers.UsuarioController;
+import Controllers.AccesoArchivo;
 
 /**
  *
@@ -20,13 +23,15 @@ public class POOII_Trabajo {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        Noticia modelo=new Noticia();
+        /*Noticia modelo=new Noticia();
         VistaNoticia vista=new VistaNoticia();
-        NoticiaController controlador=new NoticiaController(vista, modelo);
+        NoticiaController controlador=new NoticiaController(vista, modelo);*/
         
         
-        /*Para ver flujo de usuario: 
-        VistaLogin obj = new VistaLogin();*/
+        Usuario modeloUsuario = new Usuario();
+        VistaLogin login = new VistaLogin();
+        AccesoArchivo archivo = new AccesoArchivo();
+        UsuarioController controladorUsuario = new UsuarioController(login, modeloUsuario,archivo);
         
     }
     
