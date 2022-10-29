@@ -5,6 +5,7 @@
 package Controllers;
 
 import Model.Noticia;
+import Model.Usuario;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,14 +19,18 @@ import java.util.ArrayList;
  */
 public class AccesoArchivo {
     ArrayList<Noticia> arrayNoticias = new ArrayList<>();
-    RandomAccessFile archivoNoticias;
+    ArrayList<Usuario> arrayUsuarios = new ArrayList<>();
+    RandomAccessFile archivoNoticias, archivoUsuarios;
     private Noticia noticia;
+    private Usuario usuario;
     
     public AccesoArchivo()
     {
         try {
             archivoNoticias = new RandomAccessFile("Noticias.txt","rw");
             cargarDatosArray();
+            archivoUsuarios = new RandomAccessFile("usuarios.txt", "rw");
+            cargarDatosArrayUsuarios();
         } catch (Exception e) {
             System.out.println("error:"+e.toString());
         }
@@ -81,6 +86,54 @@ public class AccesoArchivo {
         catch (Exception e) 
         {
             System.out.println("error cargarDat:"+e.toString());
+        }
+    }
+        public void cargarDatosArrayUsuarios()
+        {
+            try 
+            {
+                int codUsuario, tipo;
+                String user, password, divisa;
+
+                BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
+                String line;
+                while ((line = br.readLine()) != null) 
+                {
+                    String[] temporal = new String[5];
+                    temporal = line.split(";");
+                    codUsuario = Integer.parseInt(temporal[0]);
+                    user = temporal[1];
+                    password = temporal[2];
+                    tipo = Integer.parseInt(temporal[3]);
+                    divisa = (temporal[4]);
+
+                    Usuario objTemp = new Usuario(codUsuario,user,password,tipo,divisa);
+                    arrayUsuarios.add(objTemp);
+                }
+                br.close();
+
+            } 
+        catch (Exception e) 
+        {
+            System.out.println("error cargarDat:"+e.toString());
+        }
+    }
+    //Registrar nuevo usuario
+    public void registrarUsuario(Usuario usuario)
+    {
+        try {
+            FileWriter fw = new FileWriter("usuarios.txt", true);
+            PrintWriter pw = new PrintWriter(fw);
+            
+            //Agregar un registro
+            String registro = String.valueOf(usuario.getCodUsuario() )+ ";" + usuario.getUser() + ";" + usuario.getPassword() + ";" + String.valueOf(usuario.getTipo())
+                                + ";" + usuario.getDivisa() + "\n";
+                
+            pw.append(registro);
+
+            pw.close();
+        } catch (Exception e) {
+            System.out.println("error:"+e.toString());
         }
     }
 }

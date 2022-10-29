@@ -11,6 +11,7 @@ import java.io.IOException;
 import View.VistaLogin;
 import Model.Usuario;
 import Controllers.UsuarioController;
+import Controllers.AccesoArchivo;
 
 /**
  *
@@ -27,12 +28,10 @@ public class POOII_Trabajo {
         NoticiaController controlador=new NoticiaController(vista, modelo);*/
         
         
-        /*Para ver flujo de usuario: 
-        VistaLogin obj = new VistaLogin();*/
-        
         Usuario modeloUsuario = new Usuario();
         VistaLogin login = new VistaLogin();
-        UsuarioController controladorUsuario = new UsuarioController(login, modeloUsuario);
+        AccesoArchivo archivo = new AccesoArchivo();
+        UsuarioController controladorUsuario = new UsuarioController(login, modeloUsuario,archivo);
         
     }
     
