@@ -4,13 +4,14 @@
  */
 package View;
 
+import Model.Noticia;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,104 +24,178 @@ import javax.swing.JTextField;
  * @author lizdi
  */
 public class VistaNoticia {
-    public JFrame frame;
+    //Vista general
+    
+    public JFrame VistaNoticia;
     int i;
-    public JTextField result;
     public JButton eliminar[] = new JButton[10];
     public JButton editar[] = new JButton[10];
-    public JButton agregar;
+    public JButton agregar, buscar;
     public JLabel titulo[]=new JLabel[10];
     public JLabel fecha[]=new JLabel[10];
     public JLabel fuente[]=new JLabel[10];
+    public JLabel LAño, LMes;
     public JTextField Año;
     public JTextField mes;
     
+    //Vista agregar
+    
+    public JFrame VistaAgregarNoticia;
+    public JTextField tituloAgregar, logoAgregar, autorAgregar, imagenAgregar, linkAgregar, resumenAgregar;
+    public JLabel EtiquetaTituloAgregar, EtiquetaLogoAgregar,EtiquetaAutorAgregar, EtiquetaImagenAgregar, EtiquetaLinkAgregar, EtiquetaResumenAgregar;
+    public JButton BGuardar;
+    
+    //Vista modificar
+    
+    public JFrame VistaModificarNoticia;
+    public JTextField tituloModificar,autorModificar, logoModificar, imagenModificar, linkModificar, resumenModificar;
+    public JLabel EtiquetaTituloModificar,EtiquetaAutorModificar, EtiquetaLogoModificar, EtiquetaImagenModificar, EtiquetaLinkModificar, EtiquetaResumenModificar;
+    public JButton BGuardarCambios; 
+    
+    
     int xFecha = 25;
-    int yFecha = 135;
+    int yFecha = 155;
 
     int xfuente = 135;
-    int yfuente = 135;
+    int yfuente = 155;
     
     int xtitulo = 25;
-    int ytitulo = 80;
+    int ytitulo = 100;
     
     int xEliminar = 700;
-    int yEliminar = 105;
+    int yEliminar = 125;
     
     int xEditar = 645;
-    int yEditar = 105;
+    int yEditar = 125;
     
 
-    public VistaNoticia() throws MalformedURLException, IOException
+    public VistaNoticia()
     {
-        frame = new JFrame("Calculadora");
-        Font fuenteTitulo=new Font("Comic Sans MC", Font.BOLD, 20);
+        VistaNoticia = new JFrame("Calculadora");
         agregar=new JButton("Agregar");
-        agregar.setBounds(600, 25, 100, 45);
+        agregar.setBounds(600, 25, 100, 30);
+        buscar=new JButton("Buscar");
+        buscar.setBounds(25, 65, 100, 30);
         Año= new JTextField();
-        Año.setBounds(150, 25, 100, 45);
+        Año.setBounds(315, 25, 100, 30);
         mes= new JTextField();
-        mes.setBounds(25, 25, 100, 45);
-        for(i = 0; i < 10; i++)
+        mes.setBounds(115, 25, 100, 30);
+        LAño=new JLabel("Año: ");
+        LAño.setBounds(225, 25, 80, 30);
+        LMes=new JLabel("Mes: ");
+        LMes.setBounds(25, 25, 80,30);
+        
+        VistaNoticia.add(agregar);
+        VistaNoticia.add(buscar);
+        VistaNoticia.add(Año);
+        VistaNoticia.add(mes);
+        VistaNoticia.add(LAño);
+        VistaNoticia.add(LMes);
+        VistaNoticia.setSize(810, 640);
+        VistaNoticia.setLayout(null);
+        VistaNoticia.setLocationRelativeTo(null);
+        VistaNoticia.setVisible(true);
+        VistaNoticia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void visualizar(ArrayList<Noticia> list) throws IOException{
+        
+        Font fuenteTitulo=new Font("Comic Sans MC", Font.BOLD, 20);
+        
+        for(i = 0; i < list.size(); i++)
         {
-            titulo[i] = new JLabel("Titulo");
+            titulo[i] = new JLabel(list.get(i).getTitulo());
             titulo[i].setFont(fuenteTitulo);
-            titulo[i].setBounds(xtitulo, ytitulo, 400, 45);
-            frame.add(titulo[i]);
+            titulo[i].setBounds(xtitulo, ytitulo, 400, 30);
+            VistaNoticia.add(titulo[i]);
             
-            fecha[i] = new JLabel("fecha");
-            fecha[i].setBounds(xFecha, yFecha, 45, 45);
-            frame.add(fecha[i]);
+            fecha[i] = new JLabel(list.get(i).getMes()+"/"+list.get(i).getAño());
+            fecha[i].setBounds(xFecha, yFecha, 45, 30);
+            VistaNoticia.add(fecha[i]);
             
             
-            URL url = new URL("http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg");
+            URL url = new URL(list.get(i).getLogo());
             BufferedImage imagen = ImageIO.read(url);
             Image image = imagen.getScaledInstance(45, 45, Image.SCALE_DEFAULT);
             fuente[i] = new JLabel(new ImageIcon(image));
             fuente[i].setBounds(xfuente, yfuente, 45, 45);
-            frame.add(fuente[i]);
+            VistaNoticia.add(fuente[i]);
             
             
             
             editar[i] = new JButton(String.valueOf(i+1));
             editar[i].setBounds(xEditar, yEditar, 45, 45);
             editar[i].setBackground(Color.orange);
-            frame.add(editar[i]);
+            VistaNoticia.add(editar[i]);
             
             eliminar[i] = new JButton(String.valueOf(i+1));
             eliminar[i].setBounds(xEliminar, yEliminar, 45, 45);
             
-            frame.add(eliminar[i]);
+            VistaNoticia.add(eliminar[i]);
             
             
-            yFecha =yFecha+145;
+            yFecha +=145;
 
             
-            yfuente =yfuente+ 145;
+            yfuente +=145;
 
             
-            ytitulo = ytitulo + 145;
+            ytitulo +=145;
 
-            yEliminar =yEliminar+ 145;
+            yEliminar +=145;
 
-            yEditar =yEditar+ 145;
-            
+            yEditar +=145;
             
         }
+    }
+    
+    public void VistaAgregar(){
+        VistaAgregarNoticia=new JFrame("Agrega una noticia");
+        EtiquetaTituloAgregar=new JLabel("Titulo: ");
+        EtiquetaAutorAgregar=new JLabel("Autor: ");
+        EtiquetaLogoAgregar=new JLabel("Logo(URL): "); 
+        EtiquetaImagenAgregar=new JLabel("Imagen(URL): "); 
+        EtiquetaLinkAgregar=new JLabel("Link: ");
+        EtiquetaResumenAgregar=new JLabel("Resumen: ");
+        tituloAgregar=new JTextField();
+        autorAgregar=new JTextField();
+        logoAgregar=new JTextField();
+        imagenAgregar=new JTextField();
+        linkAgregar=new JTextField();
+        resumenAgregar=new JTextField();
+        BGuardar=new JButton("Guardar");
         
-
-            
-
-        result = new JTextField();
-        result.setBounds(100, 50, 195, 45);
-        frame.add(agregar);
-        frame.add(Año);
-        frame.add(mes);
-        frame.setSize(810, 640);
-        frame.setLayout(null);
-        frame.setVisible(true);
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        EtiquetaTituloAgregar.setBounds(25, 25, 100, 30);
+        EtiquetaAutorAgregar.setBounds(25, 65, 100, 30);
+        EtiquetaLogoAgregar.setBounds(25, 105, 100, 30); 
+        EtiquetaImagenAgregar.setBounds(25, 145, 100, 30); 
+        EtiquetaLinkAgregar.setBounds(25, 185, 100, 30);
+        EtiquetaResumenAgregar.setBounds(25, 225, 100, 30);
+        tituloAgregar.setBounds(135, 25, 100, 30);
+        autorAgregar.setBounds(135, 65, 100, 30);
+        logoAgregar.setBounds(135, 105, 100, 30);
+        imagenAgregar.setBounds(135, 145, 100, 30);
+        linkAgregar.setBounds(135, 185, 100, 30);
+        resumenAgregar.setBounds(135, 225, 100, 30);
+        BGuardar.setBounds(80, 265, 100, 30);
+        
+        VistaAgregarNoticia.add(EtiquetaTituloAgregar);
+        VistaAgregarNoticia.add(EtiquetaAutorAgregar);        
+        VistaAgregarNoticia.add(EtiquetaLogoAgregar);
+        VistaAgregarNoticia.add(EtiquetaImagenAgregar);
+        VistaAgregarNoticia.add(EtiquetaLinkAgregar);
+        VistaAgregarNoticia.add(EtiquetaResumenAgregar);
+        VistaAgregarNoticia.add(tituloAgregar);
+        VistaAgregarNoticia.add(autorAgregar);        
+        VistaAgregarNoticia.add(logoAgregar);
+        VistaAgregarNoticia.add(imagenAgregar);
+        VistaAgregarNoticia.add(linkAgregar);
+        VistaAgregarNoticia.add(resumenAgregar);
+        VistaAgregarNoticia.add(BGuardar);
+        VistaAgregarNoticia.setSize(260, 350);
+        VistaAgregarNoticia.setLayout(null);
+        VistaAgregarNoticia.setLocationRelativeTo(null);
+        VistaAgregarNoticia.setVisible(true);
     }
     
 }

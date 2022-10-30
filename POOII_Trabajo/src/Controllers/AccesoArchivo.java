@@ -7,8 +7,11 @@ package Controllers;
 import Model.Noticia;
 import Model.Usuario;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -18,76 +21,129 @@ import java.util.ArrayList;
  * @author apa16
  */
 public class AccesoArchivo {
-    ArrayList<Noticia> arrayNoticias = new ArrayList<>();
+    ArrayList<Noticia> arrayNoticias;
     ArrayList<Usuario> arrayUsuarios = new ArrayList<>();
-    RandomAccessFile archivoNoticias, archivoUsuarios;
+    RandomAccessFile  archivoUsuarios;
     private Noticia noticia;
     private Usuario usuario;
+    
+    int posicionNoticias;
     
     public AccesoArchivo()
     {
         try {
-            archivoNoticias = new RandomAccessFile("Noticias.txt","rw");
-            cargarDatosArray();
+            crearArchivoNoticias();
+            arrayNoticias = new ArrayList<>();
+            cargarDatosArrayNoticias();
             archivoUsuarios = new RandomAccessFile("usuarios.txt", "rw");
             cargarDatosArrayUsuarios();
         } catch (Exception e) {
             System.out.println("error:"+e.toString());
         }
-        
     }
-    public void actualizarArchivo()
+    
+    public void crearArchivoNoticias(){
+        try{
+            File file = new File("Noticias.txt");
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+        }catch(IOException ex){System.out.println("Error: " + ex.getMessage());}
+    }
+    
+    public void MandarInformacionAArchivoNoticias(int cod, String titulo, String autor, String logo, String imagen, String link, String resumen, int año, int mes)
+    {
+        try{
+            File file = new File("Noticias.txt");
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+                try (BufferedWriter bw = new BufferedWriter(fw)) {
+                    bw.append(cod + ";");
+                    bw.append(titulo + ";");
+                    bw.append(autor + ";");
+                    bw.append(logo + ";");
+                    bw.append(imagen + ";");
+                    bw.append(link + ";");
+                    bw.append(resumen + ";");
+                    bw.append(año + ";");
+                    bw.append(mes + "\n");
+                    bw.close();
+                }catch(IOException ex){System.out.println("Error: " + ex.getMessage());}
+        }catch(IOException ex){System.out.println("Error: " + ex.getMessage());}
+    }
+    
+    public void actualizarArchivoNoticias()
     {
         try {
-            FileWriter fw = new FileWriter("productos.txt");
+            
+            FileWriter fw = new FileWriter("Noticias.txt");
             PrintWriter pw = new PrintWriter(fw);
             
             //Volver a escribir el archivo
             for(Noticia x:arrayNoticias)
             {
-                String registro = x.getTitulo()+";"+x.getAutor()+";"+x.getLogo()+";"+x.getImagen()+";"+x.getResumen()+";"+x.getAño()+";"+x.getMes();
+                String registro =x.getCod()+";"+ x.getTitulo()+";"+x.getAutor()+";"+x.getLogo()+";"+x.getImagen()+";"+x.getResumen()+";"+x.getAño()+";"+x.getMes();
                 pw.println(registro);
             }
 
             pw.close();
         } catch (Exception e) {
-            System.out.println("error:"+e.toString());
+            System.out.println("error Noticias:"+e.toString());
         }
         
     }
-    public void cargarDatosArray()
+    public void cargarDatosArrayNoticias()
     {
         try 
         {
+            
             String tittle, autor, logo, imagen,resumen, link;
-            int año, mes;
+            int año, mes, cod;
      
-            BufferedReader br = new BufferedReader(new FileReader("productos.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("Noticias.txt"));
             String line;
             while ((line = br.readLine()) != null) 
             {
-                String[] temporal = new String[8];
+                String[] temporal;
                 temporal = line.split(";");
-                tittle = temporal[0];
-                autor = temporal[1];
-                logo=temporal[2];
-                imagen=temporal[3];
-                resumen=temporal[4];
+                cod= Integer.parseInt(temporal[0]);
+                tittle = temporal[1];
+                autor = temporal[2];
+                logo=temporal[3];
+                imagen=temporal[4];
+                resumen=temporal[6];
                 link=temporal[5];
-                año = Integer.parseInt(temporal[6]);
-                mes = Integer.parseInt(temporal[7]);
+                año = Integer.parseInt(temporal[7]);
+                mes = Integer.parseInt(temporal[8]);
                 
-                Noticia objN = new Noticia(tittle, autor, logo, imagen, resumen, link, año, mes);
+                Noticia objN = new Noticia(cod,tittle, autor, logo, imagen, link, resumen, año, mes);
                 arrayNoticias.add(objN);
+                
             }
             br.close();
 
         } 
         catch (Exception e) 
         {
-            System.out.println("error cargarDat:"+e.toString());
+            System.out.println("error cargarDatNoticia:"+e.toString());
         }
     }
+    
+    public int getPosNoticia(String cod)
+    {   
+        for(Noticia x: arrayNoticias)
+        {
+            if( x.getCod() == Integer.parseInt(cod) )
+            {    
+                posicionNoticias = arrayNoticias.indexOf(x);
+            }
+        }       
+        return posicionNoticias;
+        //resetFile();
+    }
+    
         public void cargarDatosArrayUsuarios()
         {
             try 

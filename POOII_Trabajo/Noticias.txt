@@ -1,0 +1,4 @@
+0;e;e;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;34f;fg;2022;10
+1;titulo;nuevo;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;resumen;2022;10
+2;h;h;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;kmcl;mdl;2022;10
+3;y;u;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;http://www.bypeople.org/wp-content/uploads/2017/01/comercio_logo.jpg;resumen;2022;10
