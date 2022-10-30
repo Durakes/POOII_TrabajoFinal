@@ -9,6 +9,7 @@ package Model;
  * @author apa16
  */
 public class Noticia {
+    private int cod;
     private String titulo;
     private String autor;
     private String logo;
@@ -21,7 +22,8 @@ public class Noticia {
     public Noticia() {
     }
 
-    public Noticia(String titulo, String autor, String logo, String imagen, String resumen, String link, int año, int mes) {
+    public Noticia(int cod, String titulo, String autor, String logo, String imagen, String resumen, String link, int año, int mes) {
+        this.cod = cod;
         this.titulo = titulo;
         this.autor = autor;
         this.logo = logo;
@@ -32,12 +34,18 @@ public class Noticia {
         this.mes = mes;
     }
 
-    
+    public int getCod() {
+        return cod;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+
     public String getTitulo() {
         return titulo;
     }
 
-    
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -54,7 +62,6 @@ public class Noticia {
         return logo;
     }
 
-    
     public void setLogo(String logo) {
         this.logo = logo;
     }
@@ -63,17 +70,14 @@ public class Noticia {
         return imagen;
     }
 
-  
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
-   
     public String getResumen() {
         return resumen;
     }
 
-   
     public void setResumen(String resumen) {
         this.resumen = resumen;
     }
@@ -94,13 +98,14 @@ public class Noticia {
         this.año = año;
     }
 
-
     public int getMes() {
         return mes;
     }
 
-
     public void setMes(int mes) {
         this.mes = mes;
     }
+
+    
+    
 }
