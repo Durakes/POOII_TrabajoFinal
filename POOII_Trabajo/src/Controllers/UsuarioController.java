@@ -1,6 +1,7 @@
 
 package Controllers;
 
+import View.VistaDashboard;
 import View.VistaLogin;
 import View.VistaRegistro;
 import View.VistaPerfil;
@@ -16,6 +17,8 @@ public class UsuarioController implements ActionListener
     VistaRegistro vistaRegistro;
     VistaPerfil vistaPerfil;
     VistaPerfilAdmin vistaPerfilAdmin;
+    VistaDashboard vistaDashboard;
+    DivisaController divisaController;
     Usuario usuario;
     AccesoArchivo objArchivo;
     public UsuarioController(VistaLogin vistaLogin, Usuario usuario, AccesoArchivo objArchivo) 
@@ -42,6 +45,7 @@ public class UsuarioController implements ActionListener
         }
         return codigo;
     }
+
     public boolean verificarLogin(String user, String passw)
     {
         Boolean bandera = false;
@@ -51,7 +55,6 @@ public class UsuarioController implements ActionListener
             {
                 bandera = true;
                 return bandera;
-                
             }
         }
         return bandera;
@@ -69,8 +72,8 @@ public class UsuarioController implements ActionListener
                 Boolean verifica = verificarLogin(user, passw);
                 if (verifica == true) 
                 {
-                    vistaPerfil = new VistaPerfil();
-                    vistaPerfil.lblUsuario.setText(user);
+                    divisaController = new DivisaController();
+                    //vistaPerfil.lblUsuario.setText(user);
                     vistaLogin.frame.dispose();
                 }
                 else

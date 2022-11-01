@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controllers;
 
 import Model.Noticia;
@@ -16,11 +12,8 @@ import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
-/**
- *
- * @author apa16
- */
-public class AccesoArchivo {
+public class AccesoArchivo
+{
     ArrayList<Noticia> arrayNoticias;
     ArrayList<Usuario> arrayUsuarios = new ArrayList<>();
     RandomAccessFile  archivoUsuarios;
@@ -42,8 +35,10 @@ public class AccesoArchivo {
         }
     }
     
-    public void crearArchivoNoticias(){
-        try{
+    public void crearArchivoNoticias()
+    {
+        try
+        {
             File file = new File("Noticias.txt");
                 if (!file.exists()) {
                     file.createNewFile();
@@ -144,8 +139,8 @@ public class AccesoArchivo {
         //resetFile();
     }
     
-        public void cargarDatosArrayUsuarios()
-        {
+    public void cargarDatosArrayUsuarios()
+    {
             try 
             {
                 int codUsuario, tipo;
