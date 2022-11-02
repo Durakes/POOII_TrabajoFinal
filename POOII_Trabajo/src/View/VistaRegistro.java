@@ -37,6 +37,7 @@ public class VistaRegistro {
         {
                 e.printStackTrace();
         }
+
         Image dimg = logo.getScaledInstance(170, 170,Image.SCALE_SMOOTH);
         ImageIcon logoIcon = new ImageIcon(dimg);
         
@@ -70,6 +71,7 @@ public class VistaRegistro {
         String[] divisas = {"USD","EUR","PEN","CAD","NZD","MXN"};
         cbDivisas = new JComboBox<>(divisas);
         cbDivisas.setBounds(280,260,100,20);
+        cbDivisas.setMaximumRowCount(4);
         
         //Boton
         btnRegistrar = new JButton("Registrarse");

@@ -31,11 +31,7 @@ public class POOII_Trabajo {
         VistaNoticia vista=new VistaNoticia();
         NoticiaController controlador=new NoticiaController(vista, modelo);*/
         
-        
-        Usuario modeloUsuario = new Usuario();
-        VistaLogin login = new VistaLogin();
-        AccesoArchivo archivo = new AccesoArchivo();
-        UsuarioController controladorUsuario = new UsuarioController(login, modeloUsuario,archivo);
+        UsuarioController controladorUsuario = new UsuarioController();
         
         
         //UsuarioController controladorUsuario = new UsuarioController(login, modeloUsuario,archivo);

@@ -6,10 +6,13 @@ import View.VistaLogin;
 import View.VistaRegistro;
 import View.VistaPerfil;
 import View.VistaPerfilAdmin;
+import Model.Billetera;
 import Model.Usuario;
 import Controllers.AccesoArchivo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;   
+import javax.swing.Action;
 import javax.swing.JOptionPane;
 public class UsuarioController implements ActionListener
 {
@@ -21,14 +24,21 @@ public class UsuarioController implements ActionListener
     DivisaController divisaController;
     Usuario usuario;
     AccesoArchivo objArchivo;
-    public UsuarioController(VistaLogin vistaLogin, Usuario usuario, AccesoArchivo objArchivo) 
+    public UsuarioController() 
     {
-        this.vistaLogin = vistaLogin;
-        this.usuario = usuario;
-        this.objArchivo = objArchivo;
         
-        this.vistaLogin.btnLogin.addActionListener(this);
-        this.vistaLogin.btnRegistrar.addActionListener(this);
+        try 
+        {this.vistaLogin = new VistaLogin();
+        }catch(Exception e)
+        {
+
+        }
+        this.usuario = new Usuario();
+        this.objArchivo = new AccesoArchivo();
+        
+        vistaLogin.btnLogin.addActionListener(this);
+        vistaLogin.btnRegistrar.addActionListener(this);
+        
     }
     
     public int getUltCodigo()
@@ -46,7 +56,7 @@ public class UsuarioController implements ActionListener
         return codigo;
     }
 
-    public boolean verificarLogin(String user, String passw)
+    public Usuario verificarLogin(String user, String passw)
     {
         Boolean bandera = false;
         for(Usuario usuario : objArchivo.arrayUsuarios)
@@ -54,10 +64,10 @@ public class UsuarioController implements ActionListener
             if(user.equals(usuario.getUser()) && passw.equals(String.valueOf(usuario.getPassword())))
             {
                 bandera = true;
-                return bandera;
+                return usuario;
             }
         }
-        return bandera;
+        return null;
     }
     
     public void actionPerformed(ActionEvent evt)
@@ -69,12 +79,12 @@ public class UsuarioController implements ActionListener
                 String user = vistaLogin.tfUsuario.getText();
                 String passw = String.valueOf(vistaLogin.pwContrasena.getPassword());
                 
-                Boolean verifica = verificarLogin(user, passw);
-                if (verifica == true) 
+                Usuario usuario = verificarLogin(user, passw);
+                if (usuario != null) 
                 {
-                    divisaController = new DivisaController();
+                    divisaController = new DivisaController(usuario);
                     //vistaPerfil.lblUsuario.setText(user);
-                    vistaLogin.frame.dispose();
+                    this.vistaLogin.frame.dispose();
                 }
                 else
                 {
@@ -85,27 +95,51 @@ public class UsuarioController implements ActionListener
             if(evt.getSource() == vistaLogin.btnRegistrar)
             { 
                 vistaRegistro = new VistaRegistro();
-                vistaRegistro.btnRegistrar.addActionListener(new ActionListener() {
+                vistaLogin.frame.dispose();
+                vistaRegistro.btnRegistrar.addActionListener(new ActionListener()
+                {
                     @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void actionPerformed(ActionEvent e)
+                    {
                         int codigo = getUltCodigo();
                         String user = vistaRegistro.tfUsuario.getText();
                         String passw = String.valueOf(vistaRegistro.pwConfirmaContra.getPassword());
-                        String divisa = vistaRegistro.cbDivisas.getItemAt(vistaRegistro.cbDivisas.getSelectedIndex()).toString();
+                        String divisa = vistaRegistro.cbDivisas.getSelectedItem().toString();
                         int tipo = 1;
                         
                         Usuario nUsuario = new Usuario(codigo,user,passw,tipo,divisa);
                         objArchivo.registrarUsuario(nUsuario);
-                        try {
+                        try
+                        {
                             vistaPerfil = new VistaPerfil();
                             vistaPerfil.lblUsuario.setText(user);
-                        } catch (Exception exec) {
+                        } catch (Exception exec)
+                        {
+
                         }
-                        
-                        
+
+                        try
+                        {
+                            FileWriter fw = new FileWriter("src/db/billetera.csv", true);
+                            PrintWriter pw = new PrintWriter(fw);
+                            
+                            Billetera billetera = new Billetera(nUsuario.getCodUsuario());
+
+                            //Agregar un registro
+                            String registroBilletera = String.valueOf(billetera.getCodUsuario());
+                            
+                            for (int i = 0; i< 9; i++)
+                            {
+                                registroBilletera += ";" + String.valueOf(billetera.getCantidades()[i]);
+                            }
+
+                            pw.append(registroBilletera + "\n");
+                            pw.close();
+                        } catch (Exception exception) {
+                            System.out.println("error:"+exception.toString());
+                        }
                     }
                 });
-                vistaLogin.frame.dispose();
             }
         } catch (Exception ex) {
         }

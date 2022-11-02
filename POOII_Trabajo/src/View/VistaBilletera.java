@@ -23,7 +23,7 @@ public class VistaBilletera implements ActionListener {
                                 {"EUR","674"},{"JPY","674"},{"GBP","674"},
                                 {"CAD","674"},{"AUD","674"},{"MXN","674"},{"NZD","674"}};
     String fondosCripto [][] = {{"BTC","674"},{"ETH","674"},{"DOGE","674"},{"ADA","674"}};
-    String cabeceraDiv[] = {"Divisa","Fondos"};
+    public String cabeceraDiv[] = {"Divisa","Fondos"};
     String cabeceraCripto[] = {"Criptomoneda","Fondos"};
     public DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     
@@ -106,10 +106,11 @@ public class VistaBilletera implements ActionListener {
         lblMoneda.setBounds(75,500,200,20);
         lblMoneda.setForeground(Color.WHITE);
         lblMoneda.setVisible(false);
-        String[] divisas = {"USD","EUR","PEN","CAD","NZD","MXN","BTC","ETH","DOGE","ADA"};
+        String[] divisas = {"PEN","USD","EUR","JPY","GBP","CAD","AUD","MXN","NZD","BTC","ETH","DOGE","ADA"};
         cbDivisas = new JComboBox<>(divisas);
         cbDivisas.setBounds(190,500,120,20);
         cbDivisas.setVisible(false);
+        cbDivisas.setMaximumRowCount(5);
         
         lblFondo = new JLabel("Ingrese el monto:");
         lblFondo.setBounds(75,540,100,20);

@@ -32,6 +32,7 @@ public class VistaEditarPerfil implements ActionListener{
         lblDivisaP = new JLabel("Divisa principal:");
         lblDivisaP.setBounds(80,100,200,20);
         lblDivisaP.setForeground(Color.WHITE);
+
         String[] divisas = {"USD","EUR","PEN","CAD","NZD","MXN"};
         cbDivisas = new JComboBox<>(divisas);
         cbDivisas.setBounds(190,100,120,20);
@@ -40,7 +41,7 @@ public class VistaEditarPerfil implements ActionListener{
         btnGuardar.setBounds(220,160,110,20);
         btnGuardar.setBackground(new Color(252,152,53));
         btnGuardar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnGuardar.addActionListener(this);
+        //btnGuardar.addActionListener(this);
         
         btnContrasena = new JButton("Cambiar contraseña");
         btnContrasena.setBounds(60,160,150,20);
