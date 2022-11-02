@@ -16,15 +16,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class VistaPerfil implements ActionListener {
     public JFrame frame;
-    public JButton btnEditarP, btnProfAdmin, btnTodasOp, btnBilletera;
+    public JButton btnEditarP, btnProfAdmin, btnTodasOp, btnBilletera, btnAtras;
     public JLabel lblOpRec, lblUsuario, lblLogo, lblDivisaP;
     public DefaultTableModel modeloTabla = new DefaultTableModel();
     public JTable tblOpRec;
     public JScrollPane scrollPane;
-    String operacionesRec [][] = { {"20/10","352","674"},    
-                                {"20/10","352","674"},    
-                                {"20/10","352","674"},{"20/10","352","674"}};
-    String cabecera[] = {"Fecha","Monto cambiado","Monto recibido"};
+    String operacionesRec [][] = { {"20/10","352","674","USD/PEN"},    
+                                {"20/10","352","674","USD/PEN"},    
+                                {"20/10","352","674","USD/PEN"},{"20/10","352","674","USD/PEN"}};
+    public String cabecera[] = {"Fecha","Monto cambiado","Monto recibido","Monedas"}; /* Agregar PEN/USD Y FECHA */
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     
     public VistaPerfil() throws MalformedURLException
@@ -37,6 +37,10 @@ public class VistaPerfil implements ActionListener {
         btnProfAdmin.setBounds(50,5,80,20);
         btnProfAdmin.addActionListener(this);
         /*******Fin Provisional*****/
+
+        btnAtras = new JButton("atras");
+        btnAtras.setBounds(300,5,80,20);
+
         
         //Imagen
         URL url = new URL("https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000");
@@ -118,6 +122,7 @@ public class VistaPerfil implements ActionListener {
         btnBilletera.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnBilletera.addActionListener(this);
         
+        frame.add(btnAtras);
         frame.add(lblLogo);
         frame.add(lblUsuario);
         frame.add(lblDivisaP);
@@ -145,10 +150,6 @@ public class VistaPerfil implements ActionListener {
             if(e.getSource() == btnProfAdmin)
             {
                 VistaPerfilAdmin obj = new VistaPerfilAdmin();
-            }
-            if(e.getSource() == btnBilletera)
-            {
-                VistaBilletera obj = new VistaBilletera();
             }
             
             if(e.getSource() == btnTodasOp)

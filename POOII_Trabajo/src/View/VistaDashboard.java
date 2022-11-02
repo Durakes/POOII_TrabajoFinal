@@ -2,6 +2,7 @@ package View;
 import javax.swing.*;
 import javax.swing.border.Border;
 import Helpers.PaintChart;
+import Controllers.UsuarioController;
 import java.awt.Color;
 import java.awt.*;
 import java.awt.Image;
@@ -56,7 +57,7 @@ public class VistaDashboard
         perfil = new JButton();
         perfil.setIcon(profileIcon);
         perfil.setBounds(880,20,65,70);
-        perfil.setText("Perfil");
+        //perfil.setText("Perfil");
         perfil.setBackground(new Color(23,23,23));
         perfil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         perfil.setForeground(Color.WHITE);
