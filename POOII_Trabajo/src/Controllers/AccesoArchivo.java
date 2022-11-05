@@ -141,29 +141,29 @@ public class AccesoArchivo
     
     public void cargarDatosArrayUsuarios()
     {
-            try 
+        try 
+        {
+            int codUsuario, tipo;
+            String user, password, divisa;
+
+            BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
+            String line;
+            while ((line = br.readLine()) != null) 
             {
-                int codUsuario, tipo;
-                String user, password, divisa;
+                String[] temporal = new String[5];
+                temporal = line.split(";");
+                codUsuario = Integer.parseInt(temporal[0]);
+                user = temporal[1];
+                password = temporal[2];
+                tipo = Integer.parseInt(temporal[3]);
+                divisa = (temporal[4]);
 
-                BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
-                String line;
-                while ((line = br.readLine()) != null) 
-                {
-                    String[] temporal = new String[5];
-                    temporal = line.split(";");
-                    codUsuario = Integer.parseInt(temporal[0]);
-                    user = temporal[1];
-                    password = temporal[2];
-                    tipo = Integer.parseInt(temporal[3]);
-                    divisa = (temporal[4]);
+                Usuario objTemp = new Usuario(codUsuario,user,password,tipo,divisa);
+                arrayUsuarios.add(objTemp);
+            }
+            br.close();
 
-                    Usuario objTemp = new Usuario(codUsuario,user,password,tipo,divisa);
-                    arrayUsuarios.add(objTemp);
-                }
-                br.close();
-
-            } 
+        } 
         catch (Exception e) 
         {
             System.out.println("error cargarDat:"+e.toString());

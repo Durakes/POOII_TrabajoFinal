@@ -33,9 +33,10 @@ public class VistaEditarPerfil implements ActionListener{
         lblDivisaP.setBounds(80,100,200,20);
         lblDivisaP.setForeground(Color.WHITE);
 
-        String[] divisas = {"USD","EUR","PEN","CAD","NZD","MXN"};
+        String[] divisas = {"PEN","USD","EUR","JPY","GBP","CAD","AUD","MXN","NZD"};
         cbDivisas = new JComboBox<>(divisas);
         cbDivisas.setBounds(190,100,120,20);
+        cbDivisas.setMaximumRowCount(5);
         
         btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(220,160,110,20);

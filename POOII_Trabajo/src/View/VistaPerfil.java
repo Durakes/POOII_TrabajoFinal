@@ -143,10 +143,7 @@ public class VistaPerfil implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         try {
-            if(e.getSource() == btnEditarP)
-            {
-                VistaEditarPerfil obj = new VistaEditarPerfil();
-            }
+            
             if(e.getSource() == btnProfAdmin)
             {
                 VistaPerfilAdmin obj = new VistaPerfilAdmin();
