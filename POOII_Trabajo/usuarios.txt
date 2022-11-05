@@ -1,6 +1,6 @@
 1;robertoDJR;12345;1;USD
 2;durakes;12345;1;PEN
-3;AnaS;12345;1;EUR
+3;AnaS;12345;1;CAD
 4;logan;12345;1;PEN
 5;APajuelo;12345;1;MXN
 6;prueba;12345;1;PEN

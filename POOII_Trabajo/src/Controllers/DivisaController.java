@@ -10,6 +10,7 @@ import Model.TipoDivisa;
 import Model.Transaccion;
 import Model.Billetera;
 import View.VistaBilletera;
+import View.VistaEditarPerfil;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ public class DivisaController implements ActionListener
     VistaDashboard vDashboard;
     VistaPerfil vPerfil;
     VistaBilletera vistaBilletera;
+    VistaEditarPerfil vistaEditarPerfil;
     double exchangeRate;
     double exchangeRateInv;
     ArrayList<Double> ratesGraph;
@@ -45,7 +47,24 @@ public class DivisaController implements ActionListener
     {
         this.usuarioActivo = usuario;
         vDashboard = new VistaDashboard();
+        try{vPerfil = new VistaPerfil();}catch(Exception exception){}
+        vPerfil.frame.setVisible(false);
+        try{vistaBilletera = new VistaBilletera();}catch(Exception exception){}
+        vistaBilletera.frame.setVisible(false);
+        try{vistaEditarPerfil = new VistaEditarPerfil();}catch(Exception exception){}
+        vistaEditarPerfil.frame.setVisible(false);
         vDashboard.perfil.setText(usuarioActivo.getUser());
+        vDashboard.divisaPrincipal.setText(usuarioActivo.getDivisa());
+        int index = 0;
+        for(int i = 0; i < 9; i++)
+        {
+            if(vDashboard.divisas[i].equals(usuarioActivo.getDivisa()))
+            {
+                continue;
+            }
+            vDashboard.buttonTipoDivisas[index].setText(vDashboard.divisas[i]);
+            index++;
+        }
         cargarTipoCambio();
         vDashboard.monedaIni.addActionListener(this);
         vDashboard.cambioMoneda.addActionListener(this);
@@ -68,14 +87,13 @@ public class DivisaController implements ActionListener
         vDashboard.button1m.addActionListener(this);
         vDashboard.button6m.addActionListener(this);
         vDashboard.button1y.addActionListener(this);
-        vDashboard.buttonTipoDivisas[3].addActionListener(this);
 
         for(int i = 0; i < 8; i++)
         {
             final int final_i = i;
             vDashboard.buttonTipoDivisas[i].addActionListener(this);
         }
-
+        
     }
 
     public void cargarBilletera()
@@ -112,7 +130,7 @@ public class DivisaController implements ActionListener
         {
             String date;
             double firstRate, secondRate;
-            BufferedReader br = new BufferedReader(new FileReader("src/db/Divisas/PEN/USD.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("src/db/Divisas/"+ usuarioActivo.getDivisa() +"/"+vDashboard.buttonTipoDivisas[0].getText() +".csv"));
             String line;
             while ((line = br.readLine()) != null) 
             {
@@ -346,10 +364,12 @@ public class DivisaController implements ActionListener
                 vPerfil = new VistaPerfil();
                 vPerfil.lblUsuario.setText(usuarioActivo.getUser());
                 vDashboard.frame.setVisible(false);
+                vPerfil.lblDivisaP.setText("Divisa principal: " + usuarioActivo.getDivisa());
                 vPerfil.btnAtras.addActionListener(this);
                 vPerfil.btnBilletera.addActionListener(this);
                 vPerfil.modeloTabla.setDataVector(datosPerfil, vPerfil.cabecera);
                 vPerfil.tblOpRec.setModel(vPerfil.modeloTabla);
+                vPerfil.btnEditarP.addActionListener(this);
 
             }catch(Exception exception)
             {
@@ -738,7 +758,7 @@ public class DivisaController implements ActionListener
             vistaBilletera.modeloTablaDiv.setDataVector(tablaBilletera, vistaBilletera.cabeceraDiv);
             vistaBilletera.tblDivisas.setModel(vistaBilletera.modeloTablaDiv);
             vistaBilletera.btnGuardar.addActionListener(this);
-        }else if(e.getSource() == vistaBilletera.btnGuardar)
+        }if(e.getSource() == vistaBilletera.btnGuardar)
         {
             double montoAgregar = Double.parseDouble(vistaBilletera.tfFondo.getText());
 
@@ -814,6 +834,88 @@ public class DivisaController implements ActionListener
             vistaBilletera.btnGuardar.setVisible(false);
             vistaBilletera.btnCancelar.setVisible(false);
 
+        }else if(e.getSource() == vPerfil.btnEditarP)
+        {
+            vistaEditarPerfil = new VistaEditarPerfil();
+            vistaEditarPerfil.tfUsuario.setText(usuarioActivo.getUser());
+            vistaEditarPerfil.cbDivisas.setSelectedItem(usuarioActivo.getDivisa());
+            vistaEditarPerfil.btnGuardar.addActionListener(this);
+        }else if(e.getSource() == vistaEditarPerfil.btnGuardar)
+        {
+            if(!vistaEditarPerfil.tfUsuario.getText().equals(usuarioActivo.getUser()) ||!vistaEditarPerfil.cbDivisas.getSelectedItem().toString().equals(usuarioActivo.getDivisa()))
+            {
+                ArrayList<Usuario> usuarios = new ArrayList<>();
+                try 
+                {
+                int codUsuario, tipo;
+                String user, password, divisa;
+
+                BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
+                String line;
+                while ((line = br.readLine()) != null) 
+                {
+                    String[] temporal = new String[5];
+                    temporal = line.split(";");
+                    codUsuario = Integer.parseInt(temporal[0]);
+                    user = temporal[1];
+                    password = temporal[2];
+                    tipo = Integer.parseInt(temporal[3]);
+                    divisa = (temporal[4]);
+
+                    Usuario objTemp = new Usuario(codUsuario,user,password,tipo,divisa);
+                    usuarios.add(objTemp);
+                }
+                br.close();
+
+                } 
+                catch (Exception exception) 
+                {
+                    System.out.println("error cargarDat:"+exception.toString());
+                }
+                try
+                {
+            
+                    FileWriter fw = new FileWriter("usuarios.txt");
+                    PrintWriter pw = new PrintWriter(fw);
+                    
+                    Usuario usuarioActu = null;
+
+                    for(Usuario usuario: usuarios)
+                    {
+                        if(usuario.getCodUsuario() == usuarioActivo.getCodUsuario())
+                        {
+                            usuarioActu = usuario;
+                            break;
+                        }
+                    }
+                    
+                    usuarioActu.setUser(vistaEditarPerfil.tfUsuario.getText());
+                    usuarioActu.setCodDivisa(vistaEditarPerfil.cbDivisas.getSelectedItem().toString());
+                    usuarioActivo = usuarioActu;
+                    for(Usuario usuario: usuarios)
+                    {
+                        if(usuario.getCodUsuario() == usuarioActu.getCodUsuario())
+                        {
+                            usuario.setUser(usuarioActu.getUser());
+                            usuario.setCodDivisa(usuarioActu.getDivisa());
+                            break;
+                        }
+                    }
+
+                    //Volver a escribir el archivo
+                    for(Usuario usuario:usuarios)
+                    {
+                        String registro = usuario.getCodUsuario()+";"+ usuario.getUser()+";"+usuario.getPassword()+";"+usuario.getTipo()+";"+usuario.getDivisa();
+                        pw.println(registro);
+                    }
+        
+                    pw.close();
+                } catch (Exception exception) {
+                    System.out.println("error Noticias:"+exception.toString());
+                }
+                
+            }
+            vistaEditarPerfil.frame.dispose();
         }
         
     }
