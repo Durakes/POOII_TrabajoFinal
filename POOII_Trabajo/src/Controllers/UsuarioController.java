@@ -104,13 +104,13 @@ public class UsuarioController implements ActionListener
                         int codigo = getUltCodigo();
                         String user = vistaRegistro.tfUsuario.getText();
                         String passw = String.valueOf(vistaRegistro.pwConfirmaContra.getPassword());
-                        String divisa = vistaRegistro.cbDivisas.getSelectedItem().toString();
                         int tipo = 1;
                         
-                        Usuario nUsuario = new Usuario(codigo,user,passw,tipo,divisa);
+                        Usuario nUsuario = new Usuario(codigo,user,passw,tipo);
                         objArchivo.registrarUsuario(nUsuario);
                         try
                         {
+                            //! Revisar redireccion a Dashboard despues de registrado.
                             vistaPerfil = new VistaPerfil();
                             vistaPerfil.lblUsuario.setText(user);
                         } catch (Exception exec)
@@ -125,7 +125,6 @@ public class UsuarioController implements ActionListener
                             
                             Billetera billetera = new Billetera(nUsuario.getCodUsuario());
 
-                            //Agregar un registro
                             String registroBilletera = String.valueOf(billetera.getCodUsuario());
                             
                             for (int i = 0; i< 9; i++)

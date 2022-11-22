@@ -9,13 +9,14 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.imageio.ImageIO;
-public class VistaRegistro {
+
+public class VistaRegistro
+{
     public JFrame frame;
     public JButton btnRegistrar;
-    public JLabel lblTitulo, lblUsuario, lblContrasena, lblLogo, lblDivisaP,lblConfirmaContra;
+    public JLabel lblTitulo, lblUsuario, lblContrasena, lblLogo, lblConfirmaContra;
     public JTextField tfUsuario;
     public JPasswordField pwContrasena, pwConfirmaContra;;
-    public JComboBox<Object> cbDivisas;
     
     public VistaRegistro() throws MalformedURLException
     {
@@ -64,15 +65,6 @@ public class VistaRegistro {
         pwConfirmaContra = new JPasswordField();
         pwConfirmaContra.setBounds(280,200,200,20);
         
-        lblDivisaP = new JLabel("Seleccione su divisa principal:");
-        lblDivisaP.setBounds(280,240,200,20);
-        lblDivisaP.setForeground(Color.WHITE);
-        
-        String[] divisas = {"USD","EUR","PEN","CAD","NZD","MXN"};
-        cbDivisas = new JComboBox<>(divisas);
-        cbDivisas.setBounds(280,260,100,20);
-        cbDivisas.setMaximumRowCount(4);
-        
         //Boton
         btnRegistrar = new JButton("Registrarse");
         btnRegistrar.setBounds(280,300,200,20);
@@ -83,8 +75,6 @@ public class VistaRegistro {
         frame.add(lblLogo);
         frame.add(lblUsuario);
         frame.add(lblContrasena);
-        frame.add(lblDivisaP);
-        frame.add(cbDivisas);
         frame.add(tfUsuario);
         frame.add(pwContrasena);
         frame.add(lblConfirmaContra);

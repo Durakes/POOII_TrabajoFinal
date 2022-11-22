@@ -33,3 +33,5 @@ hs_err_pid*
 /TestGraph/build/
 /Testing/nbproject/private/
 /Testing/build/
+/Test/nbproject/private/
+/Test/build/

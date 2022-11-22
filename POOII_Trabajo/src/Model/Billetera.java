@@ -3,7 +3,7 @@ package Model;
 public class Billetera
 {
     private int codUsuario;
-    public double cantidades[] = new double[9];
+    public double cantidades[] = new double[6];
 
     //private double penCantidad,usdCantidad,eurCantidad,jpyCantidad,gbpCantidad,cadCantidad,audCantidad,mxnCantidad,nzdCantidad;
 
@@ -14,7 +14,7 @@ public class Billetera
     public Billetera(int codUsuario)
     {
         this.codUsuario = codUsuario;
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < 6; i++)
         {
             cantidades[i] = 0.0;
         }
