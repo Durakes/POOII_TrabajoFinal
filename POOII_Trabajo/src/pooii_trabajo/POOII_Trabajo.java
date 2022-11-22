@@ -7,6 +7,8 @@ package pooii_trabajo;
 import Controllers.NoticiaController;
 import Model.Noticia;
 import View.VistaNoticia;
+import View.VistaNotificaciones;
+
 import java.io.IOException;
 import View.VistaLogin;
 import Model.Usuario;
@@ -32,7 +34,7 @@ public class POOII_Trabajo {
         NoticiaController controlador=new NoticiaController(vista, modelo);*/
         
         UsuarioController controladorUsuario = new UsuarioController();
-        
+        //VistaNotificaciones vn= new VistaNotificaciones(); 
         
         //UsuarioController controladorUsuario = new UsuarioController(login, modeloUsuario,archivo);
         //Noticia modelo=new Noticia();
@@ -44,7 +46,7 @@ public class POOII_Trabajo {
         //VistaLogin obj = new VistaLogin();
         
         //Dashboard
-        //VistaDashboard objDashboard = new VistaDashboard();
+        //VistaDashboard objDashboard    = new VistaDashboard();
         
         //DivisaController dv = new DivisaController();
 

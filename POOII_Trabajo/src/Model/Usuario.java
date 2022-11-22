@@ -8,14 +8,13 @@ public class Usuario
     private String user;
     private String password;
     private int tipo;
-    private String divisa;
 
-    public Usuario(int codUsuario, String user, String password, int tipo, String divisa) {
+    public Usuario(int codUsuario, String user, String password, int tipo)
+    {
         this.codUsuario = codUsuario;
         this.user = user;
         this.password = password;
         this.tipo = tipo;
-        this.divisa = divisa;
     }
 
     public Usuario() {
@@ -27,14 +26,6 @@ public class Usuario
 
     public void setCodUsuario(int codUsuario) {
         this.codUsuario = codUsuario;
-    }
-
-    public String getDivisa() {
-        return divisa;
-    }
-
-    public void setCodDivisa(String divisa) {
-        this.divisa = divisa;
     }
 
     public String getUser() {
