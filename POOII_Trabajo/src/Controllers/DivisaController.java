@@ -65,7 +65,6 @@ public class DivisaController implements ActionListener
         modoCompra = "Compra";
         vDashboard.labelModoActivo.setText("");
         vDashboard.labelModoActivo.setText("MODO: " + modoCompra);
-
         try{vPerfil = new VistaPerfil();}catch(Exception exception){}
         vPerfil.frame.setVisible(false);
 
@@ -78,7 +77,6 @@ public class DivisaController implements ActionListener
         tcBcp = archivo.tipoDeCambioBancos("BCP",vDashboard.botonTipoDivisas[0].getText(), 0);
         tcBbva = archivo.tipoDeCambioBancos("BBVA",vDashboard.botonTipoDivisas[0].getText(), 0);
         tcInter = archivo.tipoDeCambioBancos("INTERBANK",vDashboard.botonTipoDivisas[0].getText(), 0);
-
         vDashboard.labelBancos[0].setText(String.valueOf(tcBcp.getCambioCompra()));
         vDashboard.labelBancos[1].setText(String.valueOf(tcBbva.getCambioCompra()));
         vDashboard.labelBancos[2].setText(String.valueOf(tcInter.getCambioCompra()));

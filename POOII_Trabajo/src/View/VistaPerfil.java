@@ -14,29 +14,22 @@ import javax.imageio.ImageIO;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class VistaPerfil implements ActionListener {
+public class VistaPerfil implements ActionListener
+{
     public JFrame frame;
-    public JButton btnEditarP, btnProfAdmin, btnTodasOp, btnBilletera, btnAtras;
+    public JButton btnEditarP, btnBilletera, btnAtras;
     public JLabel lblOpRec, lblUsuario, lblLogo, lblDivisaP;
     public DefaultTableModel modeloTabla = new DefaultTableModel();
     public JTable tblOpRec;
     public JScrollPane scrollPane;
-    String operacionesRec [][] = { {"20/10","352","674","USD/PEN"},    
-                                {"20/10","352","674","USD/PEN"},    
-                                {"20/10","352","674","USD/PEN"},{"20/10","352","674","USD/PEN"}};
-    public String cabecera[] = {"Fecha","Monto cambiado","Monto recibido","Monedas"}; /* Agregar PEN/USD Y FECHA */
+    String operacionesRec [][] = { {"2022-11-22","Compra","USD","100","BCP"}};
+    public String cabecera[] = {"Fecha","Operacion","Moneda","Monto","Entidad"}; /* Agregar PEN/USD Y FECHA */
     DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     
     public VistaPerfil() throws MalformedURLException
     {
         frame = new JFrame();
         frame.getContentPane().setBackground(new Color(23,23,23));
-        
-        /*********Provisional********/
-        btnProfAdmin = new JButton("admin");
-        btnProfAdmin.setBounds(50,5,80,20);
-        btnProfAdmin.addActionListener(this);
-        /*******Fin Provisional*****/
 
         btnAtras = new JButton("atras");
         btnAtras.setBounds(300,5,80,20);
@@ -94,6 +87,8 @@ public class VistaPerfil implements ActionListener {
         tblOpRec.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         tblOpRec.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
         tblOpRec.getColumnModel().getColumn(2).setCellRenderer( centerRenderer );
+        tblOpRec.getColumnModel().getColumn(3).setCellRenderer( centerRenderer );
+        tblOpRec.getColumnModel().getColumn(4).setCellRenderer( centerRenderer );
         tblOpRec.setBackground(new Color(61,61,61));
         tblOpRec.setForeground(Color.white);
         tblOpRec.setRowHeight(35);
@@ -104,16 +99,8 @@ public class VistaPerfil implements ActionListener {
         tblOpRec.setFocusable(false);
         tblOpRec.setDefaultEditor(Object.class, null);
         scrollPane = new JScrollPane(tblOpRec);
-        scrollPane.setBounds(50,210,300,303);
+        scrollPane.setBounds(50,210,550,303);
         scrollPane.setBackground(Color.red);
-        
-        //Boton ver todas las operaciones
-        btnTodasOp = new JButton();
-        btnTodasOp.setText("<html><center>"+"Ver todas las"+"<br>"+"operaciones"+"</center></html>");
-        btnTodasOp.setBounds(210,530,140,40);
-        btnTodasOp.setBackground(new Color(252,152,53));
-        btnTodasOp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnTodasOp.addActionListener(this);
         
         //Boton billetera
         btnBilletera = new JButton("Billetera");
@@ -129,11 +116,9 @@ public class VistaPerfil implements ActionListener {
         frame.add(btnEditarP);
         frame.add(lblOpRec);
         frame.add(scrollPane);
-        frame.add(btnProfAdmin);
-        frame.add(btnTodasOp);
         frame.add(btnBilletera);
         
-        frame.setSize(410,620);
+        frame.setSize(650,620);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -142,17 +127,8 @@ public class VistaPerfil implements ActionListener {
     }
     public void actionPerformed(ActionEvent e)
     {
-        try {
-            
-            if(e.getSource() == btnProfAdmin)
-            {
-                VistaPerfilAdmin obj = new VistaPerfilAdmin();
-            }
-            
-            if(e.getSource() == btnTodasOp)
-            {
-                VistaHistorialUser obj = new VistaHistorialUser();
-            }
+        try 
+        {
             
         } catch (Exception ex) {
         }

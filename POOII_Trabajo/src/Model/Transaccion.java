@@ -4,17 +4,18 @@ public class Transaccion
 {
     private int codUsuario;
     private String fechaTransaccion;
-    private double monedaPrim;
-    private double monedaFin;
-    private String ordenDivisas;
+    private String modoTransaccion;
+    private String moneda;
+    private Double monto;
+    private String entidad;
 
-    public Transaccion(int codUsuario, String fechaTransaccion, double monedaPrim, double monedaFin, String ordenDivisas)
-    {
-        this.fechaTransaccion = fechaTransaccion;
+    public Transaccion(int codUsuario, String fechaTransaccion, String modoTransaccion, String moneda, Double monto,String entidad) {
         this.codUsuario = codUsuario;
-        this.monedaPrim = monedaPrim;
-        this.monedaFin = monedaFin;
-        this.ordenDivisas = ordenDivisas;
+        this.fechaTransaccion = fechaTransaccion;
+        this.modoTransaccion = modoTransaccion;
+        this.moneda = moneda;
+        this.monto = monto;
+        this.entidad = entidad;
     }
 
     public int getCodUsuario() {
@@ -23,31 +24,34 @@ public class Transaccion
     public void setCodUsuario(int codUsuario) {
         this.codUsuario = codUsuario;
     }
-
     public String getFechaTransaccion() {
         return fechaTransaccion;
     }
-
     public void setFechaTransaccion(String fechaTransaccion) {
         this.fechaTransaccion = fechaTransaccion;
     }
-
-    public double getMonedaPrim() {
-        return monedaPrim;
+    public String getModoTransaccion() {
+        return modoTransaccion;
     }
-    public void setMonedaPrim(double monedaPrim) {
-        this.monedaPrim = monedaPrim;
+    public void setModoTransaccion(String modoTransaccion) {
+        this.modoTransaccion = modoTransaccion;
     }
-    public double getMonedaFin() {
-        return monedaFin;
+    public String getMoneda() {
+        return moneda;
     }
-    public void setMonedaFin(double monedaFin) {
-        this.monedaFin = monedaFin;
+    public void setMoneda(String moneda) {
+        this.moneda = moneda;
     }
-    public String getOrdenDivisas() {
-        return ordenDivisas;
+    public Double getMonto() {
+        return monto;
     }
-    public void setOrdenDivisas(String ordenDivisas) {
-        this.ordenDivisas = ordenDivisas;
+    public void setMonto(Double monto) {
+        this.monto = monto;
+    }
+    public String getEntidad() {
+        return entidad;
+    }
+    public void setEntidad(String entidad) {
+        this.entidad = entidad;
     }
 }
