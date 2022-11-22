@@ -18,13 +18,8 @@ public class VistaBilletera implements ActionListener {
     public DefaultTableModel modeloTablaCripto = new DefaultTableModel();
     public JTable tblDivisas, tblCripto;
     public JScrollPane scrollPaneDiv, scrollPaneCripto;
-    String fondosDiv [][] = { {"PEN","674"},    
-                                {"USD","674"},    
-                                {"EUR","674"},{"JPY","674"},{"GBP","674"},
-                                {"CAD","674"},{"AUD","674"},{"MXN","674"},{"NZD","674"}};
-    String fondosCripto [][] = {{"BTC","674"},{"ETH","674"},{"DOGE","674"},{"ADA","674"}};
+    String fondosDiv [][] = {{"PEN","674"},{"USD","674"},{"EUR","674"},{"JPY","674"},{"GBP","674"},{"BRL","674"}};
     public String cabeceraDiv[] = {"Divisa","Fondos"};
-    String cabeceraCripto[] = {"Criptomoneda","Fondos"};
     public DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     
     public VistaBilletera()
@@ -57,34 +52,6 @@ public class VistaBilletera implements ActionListener {
         scrollPaneDiv.setBounds(75,60,250,338);
         scrollPaneDiv.setBackground(Color.red);
         
-        //Tabla cripto
-        modeloTablaCripto.setDataVector(fondosCripto, cabeceraCripto);
-        tblCripto = new JTable();
-        tblCripto.setModel(modeloTablaCripto);
-        tblCripto.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
-        tblCripto.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
-        tblCripto.setBackground(new Color(61,61,61));
-        tblCripto.setForeground(Color.white);
-        tblCripto.setRowHeight(35);
-        tblCripto.getColumnModel().getColumn(0).setPreferredWidth(30);
-        tblCripto.getTableHeader().setOpaque(false);
-        tblCripto.getTableHeader().setBackground(new Color(252,178,30));
-        tblCripto.getTableHeader().setForeground(Color.black);
-        tblCripto.setFocusable(false);
-        tblCripto.setDefaultEditor(Object.class, null);
-        scrollPaneCripto = new JScrollPane(tblCripto);
-        scrollPaneCripto.setBounds(75,150,250,163);
-        scrollPaneCripto.setBackground(Color.red);
-        scrollPaneCripto.setVisible(false);
-        
-        //Boton Cripto
-        btnCripto = new JButton("Criptomonedas");
-        btnCripto.setBounds(75,420,145,20);
-        btnCripto.setBackground(new Color(23,23,23));
-        btnCripto.setForeground(Color.white);
-        btnCripto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnCripto.addActionListener(this);
-        
         //Boton Divisas
         btnDiv = new JButton("Divisas");
         btnDiv.setBounds(75,340,135,20);
@@ -106,7 +73,7 @@ public class VistaBilletera implements ActionListener {
         lblMoneda.setBounds(75,500,200,20);
         lblMoneda.setForeground(Color.WHITE);
         lblMoneda.setVisible(false);
-        String[] divisas = {"PEN","USD","EUR","JPY","GBP","CAD","AUD","MXN","NZD","BTC","ETH","DOGE","ADA"};
+        String[] divisas = {"PEN","USD","EUR","JPY","GBP","BRL"};
         cbDivisas = new JComboBox<>(divisas);
         cbDivisas.setBounds(190,500,120,20);
         cbDivisas.setVisible(false);
@@ -119,7 +86,7 @@ public class VistaBilletera implements ActionListener {
         tfFondo = new JTextField();
         tfFondo.setBounds(190,540,120,20);
         tfFondo.setVisible(false);
-       
+
         btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(210,580,110,20);
         btnGuardar.setBackground(new Color(252,152,53));
