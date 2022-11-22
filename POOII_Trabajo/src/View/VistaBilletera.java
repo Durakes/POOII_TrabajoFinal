@@ -10,14 +10,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class VistaBilletera implements ActionListener {
     public JFrame frame;
-    public JButton btnAgregarFon, btnCripto, btnDiv, btnGuardar, btnCancelar;;
-    public JLabel lblBilletera, lblTitulo, lblFondo, lblMoneda;
+    public JButton btnAgregarFon, btnGuardar, btnCancelar;;
+    public JLabel lblBilletera, lblFondo, lblMoneda;
     public JTextField tfFondo;
     public JComboBox<Object> cbDivisas;
     public DefaultTableModel modeloTablaDiv = new DefaultTableModel();
-    public DefaultTableModel modeloTablaCripto = new DefaultTableModel();
-    public JTable tblDivisas, tblCripto;
-    public JScrollPane scrollPaneDiv, scrollPaneCripto;
+    public JTable tblDivisas;
+    public JScrollPane scrollPaneDiv;
+    public String[] divisas = {"PEN","USD","EUR","JPY","GBP","BRL"};
     String fondosDiv [][] = {{"PEN","674"},{"USD","674"},{"EUR","674"},{"JPY","674"},{"GBP","674"},{"BRL","674"}};
     public String cabeceraDiv[] = {"Divisa","Fondos"};
     public DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -52,15 +52,6 @@ public class VistaBilletera implements ActionListener {
         scrollPaneDiv.setBounds(75,60,250,338);
         scrollPaneDiv.setBackground(Color.red);
         
-        //Boton Divisas
-        btnDiv = new JButton("Divisas");
-        btnDiv.setBounds(75,340,135,20);
-        btnDiv.setBackground(new Color(23,23,23));
-        btnDiv.setForeground(Color.white);
-        btnDiv.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnDiv.addActionListener(this);
-        btnDiv.setVisible(false);
-        
         //Boton Agregar Fondos
         btnAgregarFon = new JButton("Agregar fondos");
         btnAgregarFon.setBounds(75,450,135,20);
@@ -73,7 +64,7 @@ public class VistaBilletera implements ActionListener {
         lblMoneda.setBounds(75,500,200,20);
         lblMoneda.setForeground(Color.WHITE);
         lblMoneda.setVisible(false);
-        String[] divisas = {"PEN","USD","EUR","JPY","GBP","BRL"};
+        //String[] divisas = {"PEN","USD","EUR","JPY","GBP","BRL"};
         cbDivisas = new JComboBox<>(divisas);
         cbDivisas.setBounds(190,500,120,20);
         cbDivisas.setVisible(false);
@@ -103,9 +94,6 @@ public class VistaBilletera implements ActionListener {
         
         frame.add(lblBilletera);
         frame.add(scrollPaneDiv);
-        frame.add(scrollPaneCripto);
-        frame.add(btnCripto);
-        frame.add(btnDiv);
         frame.add(btnAgregarFon);
         frame.add(lblMoneda);
         frame.add(cbDivisas);
@@ -123,22 +111,6 @@ public class VistaBilletera implements ActionListener {
     }
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource() == btnCripto)
-        {
-            scrollPaneDiv.setVisible(false);
-            scrollPaneCripto.setVisible(true);
-            btnCripto.setVisible(false);
-            btnDiv.setVisible(true);
-            btnAgregarFon.setBounds(75,370,135,20);
-        }
-        if(e.getSource() == btnDiv)
-        {
-            scrollPaneDiv.setVisible(true);
-            scrollPaneCripto.setVisible(false);
-            btnCripto.setVisible(true);
-            btnDiv.setVisible(false);
-            btnAgregarFon.setBounds(75,450,135,20);
-        }
         if(e.getSource() == btnAgregarFon)
         {
             lblMoneda.setVisible(true);
