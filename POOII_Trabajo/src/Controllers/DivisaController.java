@@ -65,22 +65,29 @@ public class DivisaController implements ActionListener
         modoCompra = "Compra";
         vDashboard.labelModoActivo.setText("");
         vDashboard.labelModoActivo.setText("MODO: " + modoCompra);
-        try{vPerfil = new VistaPerfil();}catch(Exception exception){}
+        System.out.println("prueba 0");
+        try{vPerfil = new VistaPerfil();}catch(Exception exception){
+            System.out.println("Error: " + exception.toString());
+        }
         vPerfil.frame.setVisible(false);
-
-        try{vistaBilletera = new VistaBilletera();}catch(Exception exception){}
+        System.out.println("prueba 0.5");
+        try{vistaBilletera = new VistaBilletera();}catch(Exception exception){
+            System.out.println("Error1: " + exception.toString());
+        }
         vistaBilletera.frame.setVisible(false);
         
-        try{vistaEditarPerfil = new VistaEditarPerfil();}catch(Exception exception){}
+        try{vistaEditarPerfil = new VistaEditarPerfil();}catch(Exception exception){
+            System.out.println("Error2: " + exception.toString());
+        }
         vistaEditarPerfil.frame.setVisible(false);
-        
+        System.out.println("prueba 1");
         tcBcp = archivo.tipoDeCambioBancos("BCP",vDashboard.botonTipoDivisas[0].getText(), 0);
         tcBbva = archivo.tipoDeCambioBancos("BBVA",vDashboard.botonTipoDivisas[0].getText(), 0);
         tcInter = archivo.tipoDeCambioBancos("INTERBANK",vDashboard.botonTipoDivisas[0].getText(), 0);
         vDashboard.labelBancos[0].setText(String.valueOf(tcBcp.getCambioCompra()));
         vDashboard.labelBancos[1].setText(String.valueOf(tcBbva.getCambioCompra()));
         vDashboard.labelBancos[2].setText(String.valueOf(tcInter.getCambioCompra()));
-
+        System.out.println("prueba 2");
         vDashboard.botonPerfil.setText(usuarioActivo.getUser());
         vDashboard.botonRegistarTransaccion.addActionListener(this);
 
@@ -765,7 +772,7 @@ public class DivisaController implements ActionListener
 
             for(int i = 0; i < 6; i++)
             {
-                tablaBilletera[i][0] = vDashboard.divisas[i];
+                tablaBilletera[i][0] = vistaBilletera.divisas[i];
                 tablaBilletera[i][1] = billetera.getCantidades()[i];
             }
 
