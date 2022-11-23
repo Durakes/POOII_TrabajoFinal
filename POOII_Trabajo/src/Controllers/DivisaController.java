@@ -67,11 +67,11 @@ public class DivisaController implements ActionListener
         vDashboard.labelModoActivo.setText("");
         vDashboard.labelModoActivo.setText("MODO: " + modoCompra);
 
-        try{vPerfil = new VistaPerfil();}catch(Exception exception){
+        /*try{vPerfil = new VistaPerfil();}catch(Exception exception){
             System.out.println("Error: " + exception.toString());
         }
         vPerfil.frame.setVisible(false);
-        vPerfil.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        vPerfil.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);*/
 
         try{vistaBilletera = new VistaBilletera();}catch(Exception exception){
             System.out.println("Error1: " + exception.toString());
@@ -900,6 +900,7 @@ public class DivisaController implements ActionListener
             vistaBilletera.tfFondo.setVisible(false);
             vistaBilletera.btnGuardar.setVisible(false);
             vistaBilletera.btnCancelar.setVisible(false);
+            vistaBilletera.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         }else if(e.getSource() == vPerfil.btnEditarP)
         {
