@@ -8,8 +8,6 @@ import javax.swing.*;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 public class VistaLogin
 {
@@ -24,7 +22,7 @@ public class VistaLogin
         frame = new JFrame();
         frame.getContentPane().setBackground(new Color(23,23,23));
         
-        lblTitulo = new JLabel("Nombre del Proyecto");
+        lblTitulo = new JLabel("MONEY HOUSE");
         lblTitulo.setBounds(210,20,150,20);
         lblTitulo.setForeground(Color.WHITE);
         

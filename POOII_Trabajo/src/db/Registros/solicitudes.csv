@@ -1,7 +1,6 @@
 2,logan,4,Venta,EUR,160.0,3.9,true
-3,logan,4,Compra,USD,160.0,3.9,false
 4,logan,4,Venta,USD,160.0,3.9,true
 5,AnaS,3,Compra,JPY,620.0,3.89,true
-6,durakes,3,Compra,USD,620.0,3.89,true
+6,durakes,3,Compra,USD,620.0,3.89,false
 7,AnaS,3,Compra,USD,620.0,3.89,true
 8,AnaS,3,Venta,USD,620.0,3.89,true

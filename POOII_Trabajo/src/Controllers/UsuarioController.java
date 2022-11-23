@@ -5,7 +5,6 @@ import View.VistaDashboard;
 import View.VistaLogin;
 import View.VistaRegistro;
 import View.VistaPerfil;
-import View.VistaPerfilAdmin;
 import Model.Billetera;
 import Model.Usuario;
 import java.awt.event.ActionEvent;
@@ -17,7 +16,6 @@ public class UsuarioController implements ActionListener
     VistaLogin vistaLogin;
     VistaRegistro vistaRegistro;
     VistaPerfil vistaPerfil;
-    VistaPerfilAdmin vistaPerfilAdmin;
     VistaDashboard vistaDashboard;
     DivisaController divisaController;
     Usuario usuario;
@@ -123,7 +121,7 @@ public class UsuarioController implements ActionListener
 
                                 String registroBilletera = String.valueOf(billetera.getCodUsuario());
 
-                                for (int i = 0; i< 9; i++)
+                                for (int i = 0; i< 6; i++)
                                 {
                                     registroBilletera += ";" + String.valueOf(billetera.getCantidades()[i]);
                                 }

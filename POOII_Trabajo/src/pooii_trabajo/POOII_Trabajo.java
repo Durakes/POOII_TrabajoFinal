@@ -1,12 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-package pooii_trabajo;
 
-import Controllers.NoticiaController;
-import Model.Noticia;
-import View.VistaNoticia;
+package pooii_trabajo;
 import View.VistaNotificaciones;
 
 import java.io.IOException;
@@ -18,11 +11,6 @@ import Controllers.DivisaController;
 import View.VistaDashboard;
 import java.time.*;
 
-
-/**
- *
- * @author apa16
- */
 public class POOII_Trabajo {
 
     /**
