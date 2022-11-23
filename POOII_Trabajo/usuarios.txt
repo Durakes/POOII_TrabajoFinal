@@ -10,3 +10,5 @@
 10;prueba5;12345;1;CAD
 11;prueba9;12345;1;MXN
 12;pruebita;12345;1
+13;pruebita2;12345;1
+14;pruebita3;12345;1

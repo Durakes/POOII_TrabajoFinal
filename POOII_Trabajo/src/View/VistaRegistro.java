@@ -23,7 +23,7 @@ public class VistaRegistro
         frame = new JFrame();
         frame.getContentPane().setBackground(new Color(23,23,23));
         
-        lblTitulo = new JLabel("Nombre del Proyecto");
+        lblTitulo = new JLabel("MONEY HOUSE");
         lblTitulo.setBounds(210,20,150,20);
         lblTitulo.setForeground(Color.WHITE);
         
