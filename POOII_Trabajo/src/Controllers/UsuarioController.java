@@ -113,13 +113,6 @@ public class UsuarioController implements ActionListener
                         {
                             Usuario nUsuario = new Usuario(codigo,user,passw,tipo);
                             objArchivo.registrarUsuario(nUsuario);
-                            try
-                            {
-                                divisaController = new DivisaController(nUsuario);
-                            } catch (Exception exec)
-                            {
-
-                            }
 
                             try
                             {
@@ -139,6 +132,13 @@ public class UsuarioController implements ActionListener
                                 pw.close();
                             } catch (Exception exception) {
                                 System.out.println("error:"+exception.toString());
+                            }
+                            try
+                            {
+                                divisaController = new DivisaController(nUsuario);
+                            } catch (Exception exec)
+                            {
+
                             }
                         }else
                         {

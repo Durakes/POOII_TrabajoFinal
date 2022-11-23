@@ -9,3 +9,4 @@
 9;prueba4;12345;1;USD
 10;prueba5;12345;1;CAD
 11;prueba9;12345;1;MXN
+12;pruebita;12345;1
