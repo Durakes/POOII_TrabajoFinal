@@ -49,7 +49,7 @@ public class VistaBilletera implements ActionListener {
         tblDivisas.setFocusable(false);
         tblDivisas.setDefaultEditor(Object.class, null);
         scrollPaneDiv = new JScrollPane(tblDivisas);
-        scrollPaneDiv.setBounds(75,60,250,338);
+        scrollPaneDiv.setBounds(75,60,250,233);
         scrollPaneDiv.setBackground(Color.red);
         
         //Boton Agregar Fondos
