@@ -17,8 +17,6 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.print.DocFlavor.STRING;
-
 public class AccesoArchivo
 {
     ArrayList<Noticia> arrayNoticias;
@@ -276,7 +274,7 @@ public class AccesoArchivo
         try 
         {
             int codUsuario, tipo;
-            String user, password, divisa;
+            String user, password;
 
             BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"));
             String line;
@@ -288,7 +286,6 @@ public class AccesoArchivo
                 user = temporal[1];
                 password = temporal[2];
                 tipo = Integer.parseInt(temporal[3]);
-                divisa = (temporal[4]);
 
                 Usuario objTemp = new Usuario(codUsuario,user,password,tipo);
                 arrayUsuarios.add(objTemp);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controllers;
 
 import Model.Noticia;
@@ -13,11 +9,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author lizdi
- */
-public class NoticiaController implements ActionListener {
+public class NoticiaController implements ActionListener
+{
     private VistaNoticia vista;
     private Noticia noticia;
     private AccesoArchivo acceder;
@@ -72,17 +65,17 @@ public class NoticiaController implements ActionListener {
         return noticia.getImagen();
     }
 
-  
+
     public void setImagenes(String imagen) {
         noticia.setImagen(imagen);
     }
 
-   
+
     public String getResumenes() {
         return noticia.getResumen();
     }
 
-   
+
     public void setResumenes(String resumen) {
         noticia.setResumen(resumen);
     }
@@ -125,11 +118,10 @@ public class NoticiaController implements ActionListener {
     }
     
     
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if("Agregar".equals(e.getActionCommand())){
+        if("Agregar".equals(e.getActionCommand()))
+        {
             vista.VistaAgregar();
             //tituloAgregar, logoAgregar, imagenAgregar, linkAgregar, resumenAgregar;
             
@@ -173,8 +165,6 @@ public class NoticiaController implements ActionListener {
                 }
                 
             });
-            
-            
         }
     }
 }

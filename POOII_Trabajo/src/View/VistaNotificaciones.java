@@ -1,17 +1,11 @@
 package View;
 import java.awt.Color;
-import java.awt.*;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
-import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 

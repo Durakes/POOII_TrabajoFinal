@@ -12,13 +12,11 @@ import View.VistaNotificaciones;
 import View.VistaSolicitud;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
@@ -27,6 +25,7 @@ import java.awt.Color;
 import java.awt.*;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.time.*;
@@ -65,29 +64,31 @@ public class DivisaController implements ActionListener
         modoCompra = "Compra";
         vDashboard.labelModoActivo.setText("");
         vDashboard.labelModoActivo.setText("MODO: " + modoCompra);
-        System.out.println("prueba 0");
+
         try{vPerfil = new VistaPerfil();}catch(Exception exception){
             System.out.println("Error: " + exception.toString());
         }
         vPerfil.frame.setVisible(false);
-        System.out.println("prueba 0.5");
+        vPerfil.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         try{vistaBilletera = new VistaBilletera();}catch(Exception exception){
             System.out.println("Error1: " + exception.toString());
         }
         vistaBilletera.frame.setVisible(false);
-        
+        vistaBilletera.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         try{vistaEditarPerfil = new VistaEditarPerfil();}catch(Exception exception){
             System.out.println("Error2: " + exception.toString());
         }
         vistaEditarPerfil.frame.setVisible(false);
-        System.out.println("prueba 1");
+
         tcBcp = archivo.tipoDeCambioBancos("BCP",vDashboard.botonTipoDivisas[0].getText(), 0);
         tcBbva = archivo.tipoDeCambioBancos("BBVA",vDashboard.botonTipoDivisas[0].getText(), 0);
         tcInter = archivo.tipoDeCambioBancos("INTERBANK",vDashboard.botonTipoDivisas[0].getText(), 0);
         vDashboard.labelBancos[0].setText(String.valueOf(tcBcp.getCambioCompra()));
         vDashboard.labelBancos[1].setText(String.valueOf(tcBbva.getCambioCompra()));
         vDashboard.labelBancos[2].setText(String.valueOf(tcInter.getCambioCompra()));
-        System.out.println("prueba 2");
+
         vDashboard.botonPerfil.setText(usuarioActivo.getUser());
         vDashboard.botonRegistarTransaccion.addActionListener(this);
 
@@ -123,8 +124,6 @@ public class DivisaController implements ActionListener
             if(solicitud.getIdSolicitud() == id)
             {
                 boolean trasnValida = true;
-                Double monto = solicitud.getMonto();
-                Double tipoCambio = solicitud.getTipoCambio();
                 cargarBilletera();
 
                 Billetera billeteraAceptante = null;
@@ -338,7 +337,6 @@ public class DivisaController implements ActionListener
     {
         try 
         {
-            
             String nombre, modo,moneda;
             Double cantidad,tipoCambio;
             Boolean estado;
@@ -507,6 +505,7 @@ public class DivisaController implements ActionListener
 
                     //Agregar un registro
                     String registro = String.valueOf(usuarioActivo.getCodUsuario()) + ";" + String.valueOf(LocalDate.now())+ ";" + modo + ";" + vDashboard.labelMonedaExtranjera.getText() + ";" + vDashboard.textMonedaExtranjera.getText() + ";" + bancoSelect + "\n";
+                    
                     pw.append(registro);
                     pw.close();
 
@@ -548,7 +547,8 @@ public class DivisaController implements ActionListener
             else
                 JOptionPane.showMessageDialog(null, "No tiene los fondos suficientes","Error Registro", JOptionPane.WARNING_MESSAGE);
 
-            
+            vDashboard.textMonedaExtranjera.setText("");
+            vDashboard.textMonedaNacional.setText("");
 
         }else if(e.getSource() == vDashboard.botonUsuario)
         {
@@ -571,6 +571,7 @@ public class DivisaController implements ActionListener
                     vSolicitud.frame.dispose();
                 }
             });
+            vSolicitud.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         }else if(e.getSource() == vDashboard.botonCompraVenta)
         {
@@ -599,6 +600,9 @@ public class DivisaController implements ActionListener
 
         }else if(e.getSource() == vDashboard.botonNotif)
         {
+            solicitudes.clear();
+            cargarSolicitudes();
+
             try {
                 VistaNotificaciones vNotificaciones = new VistaNotificaciones();
                 Object datos[][] = new Object[solicitudes.size()][5];
@@ -646,7 +650,9 @@ public class DivisaController implements ActionListener
                 }
                 vNotificaciones.modeloTabla.setDataVector(datos, vNotificaciones.cabecera);
                 vNotificaciones.modeloTabla.setRowCount(index);
-            } catch (MalformedURLException e1) {
+                vNotificaciones.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            } catch (MalformedURLException e1)
+            {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
@@ -654,6 +660,19 @@ public class DivisaController implements ActionListener
 
         }else if(e.getSource() == vDashboard.botonPerfil)
         {
+            try
+            {
+                vPerfil = new VistaPerfil();
+                vPerfil.lblUsuario.setText(usuarioActivo.getUser());
+                vDashboard.frame.setVisible(false);
+                vPerfil.btnAtras.addActionListener(this);
+                vPerfil.btnBilletera.addActionListener(this);
+                vPerfil.tblOpRec.setModel(vPerfil.modeloTabla);
+                vPerfil.btnEditarP.addActionListener(this);
+            }catch(Exception exception){}
+
+            Object datosPerfil[][] = new Object[8][5];
+            registros.clear();
             try 
             {
                 int codigo;
@@ -684,53 +703,56 @@ public class DivisaController implements ActionListener
             {
                 System.out.println("error cargarDat:"+exception.toString());
             }
-
-            Object datos[][] = new Object[registros.size()][5];
-            if(registros.size()!=0)
+            System.out.println(registros.size());
+            if(registros.size() > 0)
             {
-                try 
+                Object datos[][] = new Object[registros.size()][5];
+                if(registros.size()!=0)
+                {
+                    try 
+                    {
+                        for(int i = 0; i < registros.size(); i++)
+                        {
+                            datos[i][0] = registros.get(i).getFechaTransaccion();
+                            datos[i][1] = registros.get(i).getModoTransaccion();
+                            datos[i][2] = registros.get(i).getMoneda();
+                            datos[i][3] = registros.get(i).getMonto();
+                            datos[i][4] = registros.get(i).getEntidad();
+                        }
+                    } 
+                    catch (Exception exception) 
+                    {
+                        System.out.println("error obtenerDat:"+exception.toString());
+                    }
+                }
+
+                if(registros.size() < 8)
                 {
                     for(int i = 0; i < registros.size(); i++)
                     {
-                        datos[i][0] = registros.get(i).getFechaTransaccion();
-                        datos[i][1] = registros.get(i).getModoTransaccion();
-                        datos[i][2] = registros.get(i).getMoneda();
-                        datos[i][3] = registros.get(i).getMonto();
-                        datos[i][4] = registros.get(i).getEntidad();
+                        datosPerfil[i][0] = registros.get(registros.size() - (i+1)).getFechaTransaccion();
+                        datosPerfil[i][1] = registros.get(registros.size() - (i+1)).getModoTransaccion();
+                        datosPerfil[i][2] = registros.get(registros.size() - (i+1)).getMoneda();
+                        datosPerfil[i][3] = registros.get(registros.size() - (i+1)).getMonto();
+                        datosPerfil[i][4] = registros.get(registros.size() - (i+1)).getEntidad();
                     }
-                } 
-                catch (Exception exception) 
+                }else
                 {
-                    System.out.println("error obtenerDat:"+exception.toString());
+                    for(int i = 0; i < 8; i++)
+                    {
+                        datosPerfil[i][0] = registros.get(registros.size() - (i+1)).getFechaTransaccion();
+                        datosPerfil[i][1] = registros.get(registros.size() - (i+1)).getModoTransaccion();
+                        datosPerfil[i][2] = registros.get(registros.size() - (i+1)).getMoneda();
+                        datosPerfil[i][3] = registros.get(registros.size() - (i+1)).getMonto();
+                        datosPerfil[i][4] = registros.get(registros.size() - (i+1)).getEntidad();
+                    }
                 }
             }
-
-            Object datosPerfil[][] = new Object[8][5];
-
-            for(int i = 0; i < 8; i++)
-            {
-                datosPerfil[i][0] = registros.get(registros.size() - (i+1)).getFechaTransaccion();
-                datosPerfil[i][1] = registros.get(registros.size() - (i+1)).getModoTransaccion();
-                datosPerfil[i][2] = registros.get(registros.size() - (i+1)).getMoneda();
-                datosPerfil[i][3] = registros.get(registros.size() - (i+1)).getMonto();
-                datosPerfil[i][4] = registros.get(registros.size() - (i+1)).getEntidad();
-            }
-
-            try
-            {
-                vPerfil = new VistaPerfil();
-                vPerfil.lblUsuario.setText(usuarioActivo.getUser());
-                vDashboard.frame.setVisible(false);
-
-                vPerfil.btnAtras.addActionListener(this);
-                vPerfil.btnBilletera.addActionListener(this);
+            if(registros.size() != 0)
                 vPerfil.modeloTabla.setDataVector(datosPerfil, vPerfil.cabecera);
-                vPerfil.tblOpRec.setModel(vPerfil.modeloTabla);
-                vPerfil.btnEditarP.addActionListener(this);
-
-            }catch(Exception exception)
-            {
-            }
+            else
+                vPerfil.modeloTabla.setDataVector(new Object[0][5], vPerfil.cabecera);
+            
             
         }else if(e.getSource() == vPerfil.btnAtras)
         {
@@ -780,6 +802,7 @@ public class DivisaController implements ActionListener
             vistaBilletera.modeloTablaDiv.setDataVector(tablaBilletera, vistaBilletera.cabeceraDiv);
             vistaBilletera.tblDivisas.setModel(vistaBilletera.modeloTablaDiv);
             vistaBilletera.btnGuardar.addActionListener(this);
+            vistaBilletera.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }if(e.getSource() == vistaBilletera.btnGuardar)
         {
             double montoAgregar = Double.parseDouble(vistaBilletera.tfFondo.getText());
@@ -800,7 +823,7 @@ public class DivisaController implements ActionListener
             double temporalCantidades[] = billeteraChange.getCantidades();
             for(int i = 0; i < 6; i++)
             {
-                if(vistaBilletera.cbDivisas.getSelectedItem().toString() == vDashboard.divisas[i])
+                if(vistaBilletera.cbDivisas.getSelectedItem().toString() == vistaBilletera.divisas[i])
                 {
                     temporalCantidades[i] += montoAgregar;
                 }
@@ -842,7 +865,7 @@ public class DivisaController implements ActionListener
 
             for(int i = 0; i < 6; i++)
             {
-                tablaBilletera[i][0] = vDashboard.divisas[i];
+                tablaBilletera[i][0] = vistaBilletera.divisas[i];
                 tablaBilletera[i][1] = billeteraChange.getCantidades()[i];
             }
 

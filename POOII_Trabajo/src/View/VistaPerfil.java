@@ -32,7 +32,9 @@ public class VistaPerfil implements ActionListener
         frame.getContentPane().setBackground(new Color(23,23,23));
 
         btnAtras = new JButton("atras");
-        btnAtras.setBounds(300,5,80,20);
+        btnAtras.setBackground(new Color(252,152,53));
+        btnAtras.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnAtras.setBounds(550,5,80,20);
 
         
         //Imagen
@@ -60,7 +62,7 @@ public class VistaPerfil implements ActionListener
         lblUsuario.setForeground(Color.WHITE);
         lblUsuario.setFont(new Font("Arial", Font.PLAIN, 23));
         
-        lblDivisaP = new JLabel("Divisa principal: ");
+        lblDivisaP = new JLabel("Divisa principal: SOLES");
         lblDivisaP.setBounds(180,80,200,20);
         lblDivisaP.setForeground(Color.WHITE);
         lblDivisaP.setFont(new Font("Arial", Font.PLAIN, 15));

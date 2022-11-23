@@ -2,12 +2,9 @@ package View;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import javax.swing.*;
-import java.io.*;
-public class VistaCambiarPW {
+public class VistaCambiarPW
+{
     public JFrame frame;
     public JButton btnGuardar, btnCancelar;
     public JLabel lblTitulo, lblContraAct, lblNuevaContra, lblConfirmaContra;
@@ -64,7 +61,5 @@ public class VistaCambiarPW {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        
     }
-    
 }

@@ -8,11 +8,9 @@ import View.VistaPerfil;
 import View.VistaPerfilAdmin;
 import Model.Billetera;
 import Model.Usuario;
-import Controllers.AccesoArchivo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;   
-import javax.swing.Action;
+import java.io.*;
 import javax.swing.JOptionPane;
 public class UsuarioController implements ActionListener
 {
@@ -58,12 +56,10 @@ public class UsuarioController implements ActionListener
 
     public Usuario verificarLogin(String user, String passw)
     {
-        Boolean bandera = false;
         for(Usuario usuario : objArchivo.arrayUsuarios)
         {
             if(user.equals(usuario.getUser()) && passw.equals(String.valueOf(usuario.getPassword())))
             {
-                bandera = true;
                 return usuario;
             }
         }
@@ -102,41 +98,55 @@ public class UsuarioController implements ActionListener
                     public void actionPerformed(ActionEvent e)
                     {
                         int codigo = getUltCodigo();
+                        Boolean passIsEqual = false;
                         String user = vistaRegistro.tfUsuario.getText();
-                        String passw = String.valueOf(vistaRegistro.pwConfirmaContra.getPassword());
+                        String passw = String.valueOf(vistaRegistro.pwContrasena.getPassword());
+                        String passConfirmation = String.valueOf(vistaRegistro.pwConfirmaContra.getPassword());
+
+                        if(passw.equals(passConfirmation))
+                        {
+                            passIsEqual = true;
+                        }
                         int tipo = 1;
                         
-                        Usuario nUsuario = new Usuario(codigo,user,passw,tipo);
-                        objArchivo.registrarUsuario(nUsuario);
-                        try
+                        if(passIsEqual)
                         {
-                            //! Revisar redireccion a Dashboard despues de registrado.
-                            vistaPerfil = new VistaPerfil();
-                            vistaPerfil.lblUsuario.setText(user);
-                        } catch (Exception exec)
-                        {
-
-                        }
-
-                        try
-                        {
-                            FileWriter fw = new FileWriter("src/db/billetera.csv", true);
-                            PrintWriter pw = new PrintWriter(fw);
-                            
-                            Billetera billetera = new Billetera(nUsuario.getCodUsuario());
-
-                            String registroBilletera = String.valueOf(billetera.getCodUsuario());
-                            
-                            for (int i = 0; i< 9; i++)
+                            Usuario nUsuario = new Usuario(codigo,user,passw,tipo);
+                            objArchivo.registrarUsuario(nUsuario);
+                            try
                             {
-                                registroBilletera += ";" + String.valueOf(billetera.getCantidades()[i]);
+                                divisaController = new DivisaController(nUsuario);
+                            } catch (Exception exec)
+                            {
+
                             }
 
-                            pw.append(registroBilletera + "\n");
-                            pw.close();
-                        } catch (Exception exception) {
-                            System.out.println("error:"+exception.toString());
+                            try
+                            {
+                                FileWriter fw = new FileWriter("src/db/billetera.csv", true);
+                                PrintWriter pw = new PrintWriter(fw);
+
+                                Billetera billetera = new Billetera(nUsuario.getCodUsuario());
+
+                                String registroBilletera = String.valueOf(billetera.getCodUsuario());
+
+                                for (int i = 0; i< 9; i++)
+                                {
+                                    registroBilletera += ";" + String.valueOf(billetera.getCantidades()[i]);
+                                }
+
+                                pw.append(registroBilletera + "\n");
+                                pw.close();
+                            } catch (Exception exception) {
+                                System.out.println("error:"+exception.toString());
+                            }
+                        }else
+                        {
+                            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden, vuelva a intentarlo","Error Registro", JOptionPane.WARNING_MESSAGE);
+                            vistaRegistro.pwContrasena.setText("");
+                            vistaRegistro.pwConfirmaContra.setText("");
                         }
+                        
                     }
                 });
             }

@@ -79,7 +79,7 @@ public class VistaDashboard {
         botonPerfil.setHorizontalTextPosition(SwingConstants.CENTER);
 
         botonDivisas = new JButton("Cambio de divisas");
-        botonDivisas.setBounds(20, 95, 450, 20);
+        botonDivisas.setBounds(50, 95, 800, 20);
         botonDivisas.setBackground(new Color(252, 152, 53));
         botonDivisas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -96,7 +96,7 @@ public class VistaDashboard {
 
         panelDivisas = new JPanel();
         panelDivisas.setBackground(new Color(61, 61, 61));
-        panelDivisas.setBounds(40, 172, 170, 597);
+        panelDivisas.setBounds(50, 172, 170, 597);
 
         int yPosDiv = 20;
 
@@ -199,7 +199,7 @@ public class VistaDashboard {
         frame.add(botonRegistarTransaccion);
         frame.add(labelDivisaPrincipal);
         frame.add(botonDivisas);
-        frame.add(botonNoticias);
+        //frame.add(botonNoticias);
         frame.add(botonPerfil);
         frame.add(labelTitulo);
         frame.setSize(980, 890);
