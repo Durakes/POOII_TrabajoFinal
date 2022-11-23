@@ -63,9 +63,16 @@ public class VistaDashboard {
         Image newImage = profileImage.getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);
         iconoPerfil = new ImageIcon(newImage);
 
-        botonNotif = new JButton("Notificaciones");
-        botonNotif.setBounds(800, 20, 60, 20);
+        iconoNotif = new ImageIcon("src/images/campana.png");
+        Image notifImage = iconoNotif.getImage();
+        Image nuevaImagen = notifImage.getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);
+        iconoNotif = new ImageIcon(nuevaImagen);
+
+        botonNotif = new JButton();
+        botonNotif.setIcon(iconoNotif);
+        botonNotif.setBounds(800, 20, 60, 70);
         botonNotif.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        botonNotif.setBackground(new Color(23,23,23));
 
         botonPerfil = new JButton();
         botonPerfil.setIcon(iconoPerfil);

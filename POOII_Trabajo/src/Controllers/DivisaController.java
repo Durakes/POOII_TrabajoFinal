@@ -24,6 +24,7 @@ import java.util.*;
 import java.awt.Color;
 import java.awt.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -47,6 +48,7 @@ public class DivisaController implements ActionListener
     VistaBilletera vistaBilletera;
     VistaEditarPerfil vistaEditarPerfil;
     ArrayList<Double> ratesGraph;
+    ImageIcon iconoPerfil, iconoNotif;
 
     public DivisaController(Usuario usuario)
     {
@@ -104,6 +106,8 @@ public class DivisaController implements ActionListener
             vDashboard.botonBancos[i].addActionListener(e -> seleccionBanco(final_i));
         }
 
+
+
         vDashboard.labelBancoSeleccionado.setText(vDashboard.labelBancoSeleccionado.getText() + vDashboard.botonBancos[0].getText());
         tasaCambioFinal = Double.parseDouble(vDashboard.labelBancos[0].getText());
 
@@ -124,6 +128,7 @@ public class DivisaController implements ActionListener
             if(solicitud.getIdSolicitud() == id)
             {
                 boolean trasnValida = true;
+                billeteras.clear();
                 cargarBilletera();
 
                 Billetera billeteraAceptante = null;
@@ -365,6 +370,23 @@ public class DivisaController implements ActionListener
         catch (Exception e) 
         {
             System.out.println("error cargarSolicitudes: "+e.toString());
+        }
+        System.out.println(solicitudes.size());
+
+        if(solicitudes.size() == 0)
+        {
+            iconoNotif = new ImageIcon("src/images/campana.png");
+            Image notifImage = iconoNotif.getImage();
+            Image nuevaImagen = notifImage.getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);
+            iconoNotif = new ImageIcon(nuevaImagen);
+            vDashboard.botonNotif.setIcon(iconoNotif);
+        }else
+        {
+            iconoNotif = new ImageIcon("src/images/notificacion.png");
+            Image notifImage = iconoNotif.getImage();
+            Image nuevaImagen = notifImage.getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);
+            iconoNotif = new ImageIcon(nuevaImagen);
+            vDashboard.botonNotif.setIcon(iconoNotif);
         }
     }
 
